@@ -64,6 +64,7 @@ def train(data, file_name, params, num_epochs=50, batch_size=128, train_temp=1, 
     model = make_model(data, params)
     inputs = Input(data.train_data.shape[1:])
     scores = model(inputs)
+    model = Model(inputs=inputs, outputs=scores)
 
     if init != None:
         model.load_weights(init)
@@ -80,7 +81,6 @@ def train(data, file_name, params, num_epochs=50, batch_size=128, train_temp=1, 
     
 
     if lip:
-        model = Model(inputs=inputs, outputs=scores)
         model.compile(loss=lip_loss,
                   optimizer=sgd,
                   metrics=['accuracy'])

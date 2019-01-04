@@ -12,8 +12,8 @@ import pickle
 import gzip
 import urllib.request
 
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation, Flatten
+from keras.models import Sequential, Model
+from keras.layers import Dense, Dropout, Activation, Flatten, Input
 from keras.layers import Conv2D, MaxPooling2D
 from keras.utils import np_utils
 from keras.models import load_model
@@ -86,6 +86,9 @@ class MNISTModel:
         model.add(Dense(200))
         model.add(Activation('relu'))
         model.add(Dense(10))
+        inputs = Input((28, 28, 1))
+        scores = model(inputs)
+        model = Model(inputs, scores)
         model.load_weights(restore)
 
         self.model = model
