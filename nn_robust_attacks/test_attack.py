@@ -68,9 +68,9 @@ if __name__ == "__main__":
     with tf.Session() as sess:
         data, model =  MNIST(), MNISTModel("models/mnist_lip1", sess)
         #data, model =  CIFAR(), CIFARModel("models/cifar", sess)
-        attack = CarliniL2(sess, model, batch_size=9, max_iterations=1000, confidence=0)
-        #attack = CarliniL0(sess, model, max_iterations=1000, initial_const=10,
-        #                   largest_const=15)
+        # attack = CarliniL2(sess, model, batch_size=9, max_iterations=1000, confidence=0)
+        attack = CarliniL0(sess, model, max_iterations=1000, initial_const=10,
+                          largest_const=15)
 
         inputs, targets = generate_data(data, samples=1, targeted=True,
                                         start=0, inception=False)

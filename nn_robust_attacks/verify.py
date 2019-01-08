@@ -15,9 +15,9 @@ import numpy as np
 BATCH_SIZE = 1
 
 with tf.Session() as sess:
-    data, model = MNIST(), MNISTModel("models/mnist", sess)
-    data, model = CIFAR(), CIFARModel("models/cifar", sess)
-    data, model = ImageNet(), InceptionModel(sess)
+    # data, model = MNIST(), MNISTModel("models/mnist_lip1", sess)
+    data, model = CIFAR(), CIFARModel("models/cifar_lip1", sess)
+    # data, model = ImageNet(), InceptionModel(sess)
 
     x = tf.placeholder(tf.float32, (None, model.image_size, model.image_size, model.num_channels))
     y = model.predict(x)
@@ -28,4 +28,4 @@ with tf.Session() as sess:
         #print(pred)
         #print('real',data.test_labels[i],'pred',np.argmax(pred))
         r.append(np.argmax(pred,1) == np.argmax(data.test_labels[i:i+BATCH_SIZE],1))
-        print(np.mean(r))
+    print(np.mean(r))
